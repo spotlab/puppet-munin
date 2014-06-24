@@ -54,7 +54,7 @@ define munin::plugin (
     }
   }
 
-  if $content {
+  elsif $content {
     file { "Munin_plugin_${name}":
       ensure  => $ensure,
       path    => "${munin::plugins_dir}/${name}",
@@ -74,7 +74,7 @@ define munin::plugin (
     }
   }
 
-  if $source_config {
+  elsif $source_config {
     file { "Munin_plugin_conf_${name}":
       ensure  => $ensure,
       path    => "${munin::conf_dir_plugins}/${name}",
@@ -87,7 +87,7 @@ define munin::plugin (
     }
   }
 
-  if $content_config {
+  elsif $content_config {
     file { "Munin_plugin_conf_${name}":
       ensure  => $ensure,
       path    => "${munin::conf_dir_plugins}/${name}",
@@ -97,6 +97,15 @@ define munin::plugin (
       require => Package['munin-node'],
       notify  => Service['munin-node'],
       content => $content_config,
+    }
+  }
+
+  elsif $linkplugins == true {
+    file  { "/etc/munin/plugins/${name}":
+      ensure => link,
+      require => Package['munin-node'],
+      notify  => Service['munin-node'],
+      target => "${munin::plugins_dir}/${name}",
     }
   }
 }
