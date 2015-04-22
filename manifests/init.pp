@@ -286,6 +286,7 @@ class munin (
   $extra_plugins       = params_lookup( 'extra_plugins' ),
   $graph_strategy      = params_lookup( 'graph_strategy' ),
   $graph_period        = params_lookup( 'graph_period' ),
+  $emails              = params_lookup( 'emails' ),
   $autoconfigure       = params_lookup( 'autoconfigure' ),
   $autoconfigure_template = params_lookup( 'autoconfigure_template' ),
   $restart_or_reload   = params_lookup( 'restart_or_reload' ),
